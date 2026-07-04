@@ -48,17 +48,11 @@ public class NonNulls {
     public static <T> T nonNullWithReturn(T obj, Consumer<T> action) {
         if (obj != null) {
             action.accept(obj);
-            return obj;
-        } else {
-            return obj;
         }
+        return obj;
     }
 
     public static <T> boolean nonNull(T obj) {
-        if (obj != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return obj != null;
     }
 }

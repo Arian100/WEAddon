@@ -191,7 +191,7 @@ public class NmsBiomeCommand {
         jsonBiome.add("spawners", new JsonObject());
         jsonBiome.add("spawn_costs", new JsonObject());
 
-        File biomeFile = new File("world/datapacks/valed/data/valed/worldgen/biome", name + ".json");
+        File biomeFile = new File("world/datapacks/weaddon/data/weaddon/worldgen/biome", name + ".json");
 
         try (FileWriter writer = new FileWriter(biomeFile)) {
             gson.toJson(jsonBiome, writer);
@@ -203,7 +203,7 @@ public class NmsBiomeCommand {
 
         context.getSource().sendSuccess(() -> PaperAdventure.asVanilla(MiniMessage.miniMessage().deserialize("<green>Created <dark_gray>Biome <aqua>" + name)), true);
 
-        ClientboundUpdateEnabledFeaturesPacket packet = new ClientboundUpdateEnabledFeaturesPacket(Set.of(new ResourceLocation("valed", name)));
+        ClientboundUpdateEnabledFeaturesPacket packet = new ClientboundUpdateEnabledFeaturesPacket(Set.of(new ResourceLocation("weaddon", name)));
         for (final Player player : Bukkit.getOnlinePlayers()) {
             ((CraftPlayer) player).getHandle().connection.send(packet);
         }
@@ -267,8 +267,8 @@ public class NmsBiomeCommand {
     }
 
     private static void createDatapack() {
-        Path folderPath = Paths.get("world/datapacks/valed/data/valed");
-        Path rootDp = Paths.get("world/datapacks/valed");
+        Path folderPath = Paths.get("world/datapacks/weaddon/data/weaddon");
+        Path rootDp = Paths.get("world/datapacks/weaddon");
         Path mcmeta = rootDp.resolve("pack.mcmeta");
         Path biomeFolder = folderPath.resolve("worldgen/biome");
 
@@ -289,7 +289,8 @@ public class NmsBiomeCommand {
                     {
                       "pack": {
                         "pack_format": 15,
-                        "description": "Valed Data"
+                        "description": "WEAddon Data"
+                        "description": "WEAddon Data"
                       }
                     }""";
 

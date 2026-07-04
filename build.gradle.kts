@@ -1,5 +1,4 @@
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
-import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
   `java-library`
@@ -27,11 +26,6 @@ repositories {
 
 dependencies {
   paperweight.paperDevBundle("1.20.1-R0.1-SNAPSHOT")
-
-//  implementation(platform("com.intellectualsites.bom:bom-newest:1.49")) // Ref: https://github.com/IntellectualSites/bom
-//  compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core")
-//  compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit") // { isTransitive = false }
-  implementation("com.github.retrooper:packetevents-spigot:2.4.0")
 }
 
 tasks {
@@ -50,8 +44,6 @@ tasks {
     dependsOn(shadowJar)
   }
   shadowJar {
-    relocate("io.github.retrooper.packetevents", "me.arian.wea.pe")
-    relocate("com.github.retrooper.packetevents", "me.arian.wea.pe")
     archiveFileName = "WEAddon.jar"
   }
 }
@@ -69,12 +61,6 @@ paper {
 
   prefix = "WEAddon"
   defaultPermission = BukkitPluginDescription.Permission.Default.OP
-
-  serverDependencies {
-        register("WorldEdit") {
-            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
-        }
-    }
 
   permissions {
     register("wea.*") {

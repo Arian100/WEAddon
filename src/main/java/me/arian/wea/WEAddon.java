@@ -1,8 +1,6 @@
 package me.arian.wea;
 
-import com.github.retrooper.packetevents.PacketEvents;
 import com.mojang.brigadier.CommandDispatcher;
-import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import me.arian.wea.command.*;
 import me.arian.wea.command.DisplayCommand;
 import me.arian.wea.worldgen.CustomDesertChunkGenerator;
@@ -29,16 +27,11 @@ public class WEAddon extends JavaPlugin {
     @Override
     public void onLoad() {
         inst = this;
-
-        PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
-        PacketEvents.getAPI().load();
-        // PacketEvents.getAPI().getEventManager().registerListener(new PacketLogger(), PacketListenerPriority.HIGHEST);
     }
 
     @Override
     public void onEnable() {
         createDatapack();
-        PacketEvents.getAPI().init();
 
         final PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new BlockPlaceToolCommand(), this);
@@ -55,13 +48,6 @@ public class WEAddon extends JavaPlugin {
         RotateCommand.register(dispatcher);
         SetStoneCommand.register(dispatcher, registryAccess);
         WorldCommand.register(dispatcher);
-
-        new WorldCreator(new NamespacedKey(this, "desert")).generator(new CustomDesertChunkGenerator()).createWorld();
-    }
-
-    @Override
-    public void onDisable() {
-        PacketEvents.getAPI().terminate();
     }
 
     public static WEAddon get() {
